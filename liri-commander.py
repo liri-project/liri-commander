@@ -11,7 +11,9 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.Qt import *
 from PyQt5.QtQuick import *
-from . import icons_rc
+
+command = ""
+active = True
 
 
 def open_file(filename):
@@ -42,6 +44,43 @@ quit = ["bye", "by", "goody bye", "buy", "quit", "seeya", "later", "shutdown"]
 
 active = True
 
+def initSpeak():
+    print("Speaking")
+    open_file('./audio/audio_initiate.wav')
+    with sr.Microphone() as source:
+        print("Say something")
+        audio = r.listen(source)
+
+    open_file('./audio/audio_end.wav')
+
+    command = ""
+
+    # recognize speech using Google Speech Recognition
+    try:
+        # for testing purposes, we're just using the default API key
+        # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
+        # instead of `r.recognize_google(audio)`
+        # print("Google Speech Recognition thinks you said " + r.recognize_google(audio))
+        obj = engine.rootObjects()
+        myObj = obj[0].findChild(QObject, 'mainPage')
+        QMetaObject.invokeMethod(myObj, "updateQuestion", Qt.DirectConnection, Q_ARG("QVariant", r.recognize_google(audio)))
+        command = r.recognize_google(audio)
+
+
+    except sr.UnknownValueError:
+        print("Google Speech Recognition could not understand audio")
+    except sr.RequestError as e:
+        print("Could not request results from Google Speech Recognition service; {0}".format(e))
+
+    if command in quit:
+        say("Bye")
+        active = False
+    else:
+        commander = Commander()
+        commander.discover(command)
+
+
+
 if __name__ == "__main__":
     # Create the application instance.
     app = QGuiApplication(sys.argv)
@@ -50,12 +89,20 @@ if __name__ == "__main__":
     engine = QQmlApplicationEngine()
 
     engine.addImportPath("/usr/lib/qt/qml/")
+    engine.addImportPath("/Users/nickgermaine/Qt/5.7/clang_64/qml")
 
     # Create a component factory and load the QML script.
     engine.load(QUrl.fromLocalFile("main.qml"))
 
     win = engine.rootObjects()[0]
+    speakButton = win.findChild(QObject, "speakButton")
+    speakButton.initSpeak.connect(initSpeak)
+    ctx = engine.rootContext()
+    ctx.setContextProperty("mainAppPy", engine)
+
+
     win.show()
+
     sys.exit(app.exec_())
 
 
