@@ -1,6 +1,8 @@
 # Liri Commander
 ### A smart, material, virtual assistant
 
+![alt tag](https://github.com/liri-project/liri-commander/blob/master/images/commander-screen-1.png)
+
 ## Dependencies
 
 In order to build Liri Commander from source, you will need to install a series of dependencies.
