@@ -6,6 +6,12 @@ import simplejson as json
 from commands import Commander, Response
 import pyaudio
 import wave
+import sys, os
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.Qt import *
+from PyQt5.QtQuick import *
+from . import icons_rc
 
 
 def open_file(filename):
@@ -36,8 +42,24 @@ quit = ["bye", "by", "goody bye", "buy", "quit", "seeya", "later", "shutdown"]
 
 active = True
 
+if __name__ == "__main__":
+    # Create the application instance.
+    app = QGuiApplication(sys.argv)
 
-while active:
+    # Create a QML engine.
+    engine = QQmlApplicationEngine()
+
+    engine.addImportPath("/usr/lib/qt/qml/")
+
+    # Create a component factory and load the QML script.
+    engine.load(QUrl.fromLocalFile("main.qml"))
+
+    win = engine.rootObjects()[0]
+    win.show()
+    sys.exit(app.exec_())
+
+
+    '''QApplication,
     open_file('./audio/audio_initiate.wav')
     with sr.Microphone() as source:
         print("Say something")
@@ -66,4 +88,5 @@ while active:
         commander = Commander()
         commander.discover(command)
         active = False
+    '''
 

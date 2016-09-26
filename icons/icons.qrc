@@ -1,0 +1,45 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+
+<qresource prefix="/icons/communication">
+	<file alias="chat.svg">communication_chat.svg</file>
+</qresource>
+
+<qresource prefix="/icons/image">
+	<file alias="color_lens.svg">image_color_lens.svg</file>
+</qresource>
+
+<qresource prefix="/icons/av">
+	<file alias="volume_up.svg">av_volume_up.svg</file>
+	<file alias="volume_down.svg">av_volume_down.svg</file>
+	<file alias="volume_off.svg">av_volume_off.svg</file>
+	<file alias="shuffle.svg">av_shuffle.svg</file>
+	<file alias="skip_next.svg">av_skip_next.svg</file>
+	<file alias="play_arrow.svg">av_play_arrow.svg</file>
+	<file alias="pause.svg">av_pause.svg</file>
+	<file alias="skip_previous.svg">av_skip_previous.svg</file>
+	<file alias="album.svg">av_album.svg</file>
+	<file alias="queue_music.svg">av_queue_music.svg</file>
+	<file alias="mic.svg">av_mic.svg</file>
+</qresource>
+
+<qresource prefix="/icons/content">
+	<file alias="sort.svg">content_sort.svg</file>
+</qresource>
+
+<qresource prefix="/icons/social">
+	<file alias="person.svg">social_person.svg</file>
+	<file alias="public.svg">social_public.svg</file>
+</qresource>
+
+<qresource prefix="/icons/action">
+	<file alias="settings.svg">action_settings.svg</file>
+	<file alias="dashboard.svg">action_dashboard.svg</file>
+	<file alias="language.svg">action_language.svg</file>
+</qresource>
+
+<qresource prefix="/icons/navigation">
+	<file alias="arrow_drop_down.svg">navigation_arrow_drop_down.svg</file>
+</qresource>
+
+</RCC>
